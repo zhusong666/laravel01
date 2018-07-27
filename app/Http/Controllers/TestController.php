@@ -23,7 +23,7 @@ class TestController extends Controller
      */
     public function create()
     {
-       
+
     }
 
     /**
@@ -45,7 +45,7 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -56,7 +56,7 @@ class TestController extends Controller
      */
     public function edit($id)
     {
-        //
+           //
     }
 
     /**
@@ -66,6 +66,7 @@ class TestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
         //
