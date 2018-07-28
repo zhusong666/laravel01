@@ -28,6 +28,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    //启动一个事件监听,在User实例被创建前给$user添加一个activation_token的随机令牌
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->activation_token = str_random(30);
+        });
+    }
 
     public function gravatar($size = '100')
     {
