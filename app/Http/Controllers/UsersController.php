@@ -33,8 +33,13 @@ class UsersController extends Controller
     public function show(User $user)
     {
         //只有当前用户才能访问这个方法
-         $this->authorize('view',$user);
-        return view('users.show',compact('user'));
+        $this->authorize('view',$user);
+
+        $statuses = $user->statuses()
+                         ->orderBy('created_at', 'desc')
+                         ->paginate(30);
+
+        return view('users.show',compact('user','statuses'));
     }
 
     public function store(Request $request)

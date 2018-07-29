@@ -38,6 +38,11 @@ class User extends Authenticatable
         });
     }
 
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
+
     public function gravatar($size = '100')
     {
         $hash = md5(strtolower(trim($this->attributes['email'])));
@@ -47,6 +52,12 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function feed()
+    {
+        return $this->statuses()
+                    ->orderBy('created_at', 'desc');
     }
 }
 

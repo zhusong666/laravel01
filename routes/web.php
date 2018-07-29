@@ -29,11 +29,13 @@ Route::post('login', 'SessionsController@store')->name('login');
 Route::delete('logout', 'SessionsController@destroy')->name('logout');
 //发送邮件的回调路由
 Route::get('signup/confirm/{token}', 'UsersController@confirmEmail')->name('confirm_email');
-
+//忘记密码和重设密码路由
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+//创建微博和删除微博路由
+Route::resource('statuses', 'StatusesController', ['only' => ['store', 'destroy']]);
 
 
 
