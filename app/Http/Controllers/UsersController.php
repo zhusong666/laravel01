@@ -33,7 +33,7 @@ class UsersController extends Controller
     public function show(User $user)
     {
         //只有当前用户才能访问这个方法
-        $this->authorize('view',$user);
+        // $this->authorize('view',$user);
 
         $statuses = $user->statuses()
                          ->orderBy('created_at', 'desc')
@@ -134,6 +134,20 @@ class UsersController extends Controller
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPassword($token));
+    }
+
+    public function followings(User $user)
+    {
+        $users = $user->followings()->paginate(30);
+        $title = '关注的人';
+        return view('users.show_follow', compact('users', 'title'));
+    }
+
+    public function followers(User $user)
+    {
+        $users = $user->followers()->paginate(30);
+        $title = '粉丝';
+        return view('users.show_follow', compact('users', 'title'));
     }
 }
 
